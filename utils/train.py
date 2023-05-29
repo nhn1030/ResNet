@@ -8,7 +8,6 @@ from torch.utils.data import DataLoader
 
 from models.ResNet_CIFAR10 import ResNet18
 
-
 def get_train_loader(batch_size, num_workers):
     transform_train = Compose([
         RandomCrop(32, padding=4),
