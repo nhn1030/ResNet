@@ -6,7 +6,7 @@ from torchvision.datasets import CIFAR10
 from torchvision.transforms import Compose, RandomCrop, RandomHorizontalFlip, ToTensor
 from torch.utils.data import DataLoader
 
-from models.ResNet_CIFAR10 import ResNet18
+from Model.ResNet_CIFAR10 import ResNet18
 
 def get_train_loader(batch_size, num_workers):
     transform_train = Compose([
