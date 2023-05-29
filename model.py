@@ -62,7 +62,7 @@ class ResNet(nn.Module): # ResNet 클래스 정의 nn.Module 상속 받음
     
     # _make_layer 함수 정의 <- ResNet 레이어를 생성하는 역할을 함, 입력으로 받은 매개변수에 따라 여러 개의 블록을 반복하는 구조
     # block : 사용할 블록 클래스 (BasicBlock) outplanes : 출력 특징맵의 채널 수, numblocks : 해당 레이어에어서 반복되는 블록 수, stride : 스트라이드
-    def _make_layer(block, outplanes, num_blocks, stride):
+    def _make_layer(self, block, outplanes, num_blocks, stride):
         # strides 리스트는 stride 값을 리스트의 첫번째 요소로 받고, 나머지는 1로 채워진 리스트를 반환 
         # 이유는 첫번째 블록은 입력과 동일한 크기를 유지하기위해 스트라이드를 그대로 사용하고, 나머지는 스트라이드가 1로 고정되도록 하기 위함임
         strides = [stride] + [1] * (num_blocks - 1)
@@ -77,7 +77,7 @@ class ResNet(nn.Module): # ResNet 클래스 정의 nn.Module 상속 받음
         return nn.Sequential(*layers)
     
     def forward(self, x):
-        # 입력 데이터 x 를 conv1 망에 통과시켜 컨볼루션 연산을 수행한다. 그후 배치정규화를 거쳐 렐루를 엑티베이트헤 비선형성을 도입 후 out에 저장
+        # 입력 데이터 x 를 conv1 망에 통과시켜 컨볼루션 연산을 수행한다. 그후 배치정규화를 거쳐 렐루로 엑티베이트헤 비선형성을 도입 후 out에 저장
         out = F.relu(self.bn1(self.conv1(x)))
         # out을 각각 self.layer1,2,3,4에 전달하여 레이어를 통과시킴 통과 시킬때 마다 업데이트
         out = self.layer1(out)
