@@ -1,2 +1,4 @@
 datasets/cifar-10-batches-py/
 datasets/cifar-10-python.tar.gz
+utils/resnet18_cifar10.csv
+utils/resnet34_cifar10.csv
