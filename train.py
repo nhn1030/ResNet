@@ -13,7 +13,7 @@ if __name__ == '__main__':
     test_loader = test_loader(batch_size=128, num_workers=2)
 
 
-    device = 'cpu'
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
     net = ResNet18()
     net = net.to(device)
