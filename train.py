@@ -1,12 +1,19 @@
+import sys
 import os
+model_dir = os.path.abspath('/Users/nohyeonnam/Documents/exercise/Model')
+sys.path.append(model_dir)
+
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from torchvision.datasets import CIFAR10
 from torchvision.transforms import Compose, RandomCrop, RandomHorizontalFlip, ToTensor
-from torch.utils.data import DataLoader
 
+from torch.utils.data import DataLoader
 from Model.ResNet_CIFAR10 import ResNet18
+
+
 
 def get_train_loader(batch_size, num_workers):
     transform_train = Compose([
