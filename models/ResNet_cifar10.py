@@ -53,8 +53,8 @@ class ResNet(nn.Module): # ResNet 클래스 정의 nn.Module 상속 받음
         self.bn1 = nn.BatchNorm2d(64)
         
         # resnet 모델의 구성을 정의하는 부분
-        # _make_layer 매서드를 통해 각각의 레이어를 생성 (논문의 레즈넷 구조표와 동일하게 설정)
-        self.layer1 = self._make_layer(block, 64, num_blocks[0], stride=1) 
+        # _make_layer 매서드를 통해 각각의 레이어를 생성 (논문의 레즈넷 구조와 동일하게 설정)                   
+        self.layer1 = self._make_layer(block, 64, num_blocks[0], stride=1)         
         self.layer2 = self._make_layer(block, 128, num_blocks[1], stride=2)
         self.layer3 = self._make_layer(block, 256, num_blocks[2], stride=2)
         self.layer4 = self._make_layer(block, 512, num_blocks[3], stride=2)
@@ -66,7 +66,6 @@ class ResNet(nn.Module): # ResNet 클래스 정의 nn.Module 상속 받음
         # strides 리스트는 stride 값을 리스트의 첫번째 요소로 받고, 나머지는 1로 채워진 리스트를 반환 
         # 이유는 첫번째 블록은 입력과 동일한 크기를 유지하기위해 스트라이드를 그대로 사용하고, 나머지는 스트라이드가 1로 고정되도록 하기 위함임
         strides = [stride] + [1] * (num_blocks - 1)
-
         # 반복문을 통해 블록을 생성하여 추가함, 각 블록은 block 클래스의 인스턴스로 생성되며 괄호 안의 매개변수를 전달함
         layers = []
         for stride in strides:
@@ -84,7 +83,7 @@ class ResNet(nn.Module): # ResNet 클래스 정의 nn.Module 상속 받음
         out = self.layer2(out)
         out = self.layer3(out)
         out = self.layer4(out)
-        # out에 max pooling of 연산을 적용하여 차원을 축소시킴, (입력이미지의 공간적 특징을 압축하는 역할)
+        # out에 avg pooling of 연산을 적용하여 차원을 축소시킴, (입력이미지의 공간적 특징을 압축하는 역할)
         out = F.avg_pool2d(out, 4)
         # out의 텐서 크기를 재조정하고 배치 차원을 유지하면서 나머지 차원들을 하나의 차원으로 펼처준다. (1차원으로 flatten)
         out = out.view(out.size(0), -1)
