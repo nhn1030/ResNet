@@ -1,6 +1,7 @@
 import torch.nn as nn
 import torch.nn.functional as F
 
+# Basic Block 정의 하는 부분
 class BasicBlock(nn.Module):
     def __init__(self, in_planes, out_planes, stride=1):
         super(BasicBlock, self).__init__()
